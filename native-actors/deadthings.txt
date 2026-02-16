@@ -1,0 +1,114 @@
+// Gibbed marine -----------------------------------------------------------
+
+thing GibbedMarine
+{
+    States
+    {
+    Spawn:
+        PLAY W -1
+        Stop
+    }
+}
+
+// Gibbed marine (extra copy) ----------------------------------------------
+
+thing GibbedMarineExtra : GibbedMarine
+{
+}
+
+// Dead marine -------------------------------------------------------------
+
+thing DeadMarine
+{
+    States
+    {
+    Spawn:
+        PLAY N -1
+        Stop
+    }
+}
+
+/* If it wasn't for Dehacked compatibility, the rest of these would be
+ * better defined as single frame states. But since Doom reused the
+ * dead state from the original monsters, we need to do the same.
+ */
+
+// Dead zombie man ---------------------------------------------------------
+
+thing DeadZombieMan : ZombieMan
+{
+    Skip_Super
+    DropItem None
+    States
+    {
+    Spawn:
+        Goto Super::Death+4
+    }
+}
+
+// Dead shotgun guy --------------------------------------------------------
+
+thing DeadShotgunGuy : ShotgunGuy
+{
+    Skip_Super
+    DropItem None
+    States
+    {
+    Spawn:
+        Goto Super::Death+4
+    }
+}
+
+// Dead imp ----------------------------------------------------------------
+
+thing DeadDoomImp : DoomImp
+{
+    Skip_Super
+    States
+    {
+    Spawn:
+        Goto Super::Death+4
+    }
+}
+
+// Dead demon --------------------------------------------------------------
+
+thing DeadDemon : Demon
+{
+    Skip_Super
+    States
+    {
+    Spawn:
+        Goto Super::Death+5
+    }
+}
+
+// Dead cacodemon ----------------------------------------------------------
+
+thing DeadCacodemon : Cacodemon
+{
+    Skip_Super
+    States
+    {
+    Spawn:
+        Goto Super::Death+5
+    }
+}
+
+// Dead lost soul ----------------------------------------------------------
+
+/* [RH] Considering that the lost soul removes itself when it dies, there
+ * really wasn't much point in id including this thing, but they did anyway.
+ * (There was probably a time when it stayed around after death, and this is
+ * a holdover from that.)
+ */
+
+thing DeadLostSoul : LostSoul
+{
+    Skip_Super
+    States
+    {
+    Spawn:
+        Goto Super::Death+5
+    }
+}
