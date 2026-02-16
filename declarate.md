@@ -72,7 +72,7 @@ The #include directive includes the contents of the specified lump file. The inc
 
 >version *string*
 
-Should be the fist record in any DECLARATE file. Expected to take the format of "..". The regex string `^(\d+)\.(\d+)\.(\d+)$` should thus result in an exact match and three groups with the provided value.
+Must be the fist record in any DECLARATE file. Expected to take the format of "..". The regex string `^(\d+)\.(\d+)\.(\d+)$` should thus result in an exact match and three groups with the provided value.
 
 ### 2.3 - Actor Definition
 >*actor-definition*:
