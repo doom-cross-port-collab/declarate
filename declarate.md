@@ -72,9 +72,10 @@ The #include directive includes the contents of the specified lump file. The inc
 
 >version *string*
 
-Must be the fist record in any DECLARATE file. Expected to take the format of "..". The regex string `^(\d+)\.(\d+)\.(\d+)$` should thus result in an exact match and three groups with the provided value.
+Must be the fist record in any DECLARATE file. Expected to take the format of `".."`. The regex string `^(\d+)\.(\d+)\.(\d+)$` should thus result in an exact match and three groups with the provided value.
 
 ### 2.3 - Actor Definition
+
 >*actor-definition*:
 >>*actor-header* { *actor-bodyₒₚₜ* }
 
@@ -82,9 +83,10 @@ Must be the fist record in any DECLARATE file. Expected to take the format of ".
 >>*actor-class* *identifier* *inheritance-specifierₒₚₜ* *replaces-specifierₒₚₜ* *editor-numberₒₚₜ* nativeₒₚₜ
 
 >*actor-class*:
->>thing
->>weapon
->>ammo
+>>thing  
+>>weapon  
+>>ammo  
+>>item
 
 >*inheritance-specifier*:
 >>: *identifier*
@@ -116,6 +118,7 @@ The *editor-number* specifies a number which is used to reference this actor for
 The *native* keyword marks an actor as native, meaning it exists in the engine's original code and should not be modified.
 
 ### 2.3.1 - Properties
+
 >*property-assignment*:
 >>*property* *property-args*
 
@@ -140,6 +143,7 @@ In the case of duplicated assignments, the last assignment is used.
 **Note:** Due to the zero initialization of actor structures, integer/float properties default to 0 if not specified in any parent. String properties default to NULL.
 
 ### 2.3.2 - Flags
+
 >*flag-assignment*:
 >>\+ *flag*  
 >>\- *flag*
