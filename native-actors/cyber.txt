@@ -1,10 +1,18 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Cyberdemon
 //
 //===========================================================================
 
-thing Cyberdemon
+sound CyberSight  { prefix lump "CYBSIT" }
+sound CyberActive { prefix lump "DMACT" }
+sound CyberPain   { prefix lump "DMPAIN" }
+sound CyberDeath  { prefix lump "CYBDTH" }
+sound CyberHoof   { prefix lump "HOOF" }
+
+thing Cyberdemon 16 native
 {
     Health 4000
     Radius 40
@@ -12,19 +20,18 @@ thing Cyberdemon
     Mass 1000
     Speed 16
     PainChance 20
-    Monster
-    MinMissileChance 160
-    +BOSS
-    +MISSILEMORE
-    +FLOORCLIP
+    MONSTER
     +NORADIUSDMG
-    +DONTMORPH
-    +BOSSDEATH
-    SeeSound "cyber/sight"
-    PainSound "cyber/pain"
-    DeathSound "cyber/death"
-    ActiveSound "cyber/active"
-    Obituary "$OB_CYBORG"
+    +HIGHERMPROB
+    +RANGEHALF
+    +FULLVOLSOUNDS
+    +E2M8BOSS
+    +E4M6BOSS
+    SeeSound CyberSight
+    PainSound CyberPain
+    DeathSound CyberDeath
+    ActiveSound CyberActive
+    Obituary "%o was splattered by a cyberdemon."
     States
     {
     Spawn:
@@ -51,7 +58,7 @@ thing Cyberdemon
         CYBR H 10
         CYBR I 10 A_Scream
         CYBR JKL 10
-        CYBR M 10 A_NoBlocking
+        CYBR M 10 A_Fall
         CYBR NO 10
         CYBR P 30
         CYBR P -1 A_BossDeath

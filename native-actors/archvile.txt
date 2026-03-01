@@ -1,10 +1,22 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Arch Vile
 //
 //===========================================================================
 
-thing Archvile
+sound VileSight    { prefix lump "VILSIT" }
+sound VileActive   { prefix lump "VILACT" }
+sound VilePain     { prefix lump "VIPAIN" }
+sound VileDeath    { prefix lump "VILDTH" }
+sound VileRaise    { prefix lump "SLOP" }
+sound VileStart    { prefix lump "VILATK" }
+sound VileStop     { prefix lump "BAREXP" }
+sound VileFirestrt { prefix lump "FLAMST" }
+sound VileFirecrkl { prefix lump "FLAME" }
+
+thing Archvile 64 native
 {
     Health 700
     Radius 20
@@ -13,15 +25,15 @@ thing Archvile
     Speed 15
     PainChance 10
     MONSTER
-    MaxTargetRange 896
-    +QUICKTORETALIATE
-    +NOTARGET
-    SeeSound "vile/sight"
-    PainSound "vile/pain"
-    DeathSound "vile/death"
-    ActiveSound "vile/active"
-    MeleeSound "vile/stop"
-    Obituary "$OB_VILE"
+    +SHORTMRANGE
+    +DMGIGNORED
+    +NOTHRESHOLD
+    SeeSound VileSight
+    PainSound VilePain
+    DeathSound VileDeath
+    ActiveSound VileActive
+    //MeleeSound VileStop
+    Obituary "%o was incinerated by an archvile."
     States
     {
     Spawn:
@@ -48,7 +60,7 @@ thing Archvile
     Death:
         VILE Q 7
         VILE R 7 A_Scream
-        VILE S 7 A_NoBlocking
+        VILE S 7 A_Fall
         VILE TUVWXY 7
         VILE Z -1
         Stop
@@ -61,11 +73,11 @@ thing Archvile
 //
 //===========================================================================
 
-thing ArchvileFire
+thing ArchvileFire native
 {
     +NOBLOCKMAP
     +NOGRAVITY
-    RenderStyle "Add"
+    //RenderStyle "Add"
     States
     {
     Spawn:

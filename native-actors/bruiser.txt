@@ -1,10 +1,20 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Baron of Hell
 //
 //===========================================================================
 
-thing BaronOfHell
+sound BaronSight  { prefix lump "BRSSIT" }
+sound BaronActive { prefix lump "DMACT" }
+sound BaronPain   { prefix lump "DMPAIN" }
+sound BaronMelee  { prefix lump "CLAW" }
+sound BaronDeath  { prefix lump "BRSDTH" }
+sound BaronAttack { prefix lump "FIRSHT" }
+sound BaronShotx  { prefix lump "FIRXPL" }
+
+thing BaronOfHell 3003 native
 {
     Health 1000
     Radius 24
@@ -13,13 +23,13 @@ thing BaronOfHell
     Speed 8
     PainChance 50
     MONSTER
-    +BOSSDEATH
-    SeeSound "baron/sight"
-    PainSound "baron/pain"
-    DeathSound "baron/death"
-    ActiveSound "baron/active"
-    Obituary "$OB_BARON"
-    HitObituary "$OB_BARONHIT"
+    +E1M8BOSS
+    SeeSound BaronSight
+    PainSound BaronPain
+    DeathSound BaronDeath
+    ActiveSound BaronActive
+    Obituary "%o was bruised by a Baron of Hell."
+    HitObituary "%o was ripped open by a Baron of Hell."
     States
     {
     Spawn:
@@ -41,7 +51,7 @@ thing BaronOfHell
         BOSS I  8
         BOSS J  8 A_Scream
         BOSS K  8
-        BOSS L  8 A_NoBlocking
+        BOSS L  8 A_Fall
         BOSS MN 8
         BOSS O -1 A_BossDeath
         Stop
@@ -58,15 +68,20 @@ thing BaronOfHell
 //
 //===========================================================================
 
-thing HellKnight : BaronOfHell
+sound KnightSight  { prefix lump "kntsit" }
+sound KnightActive { prefix lump "dmact" }
+sound KnightPain   { prefix lump "dmpain" }
+sound KnightDeath  { prefix lump "kntdth" }
+
+thing HellKnight : BaronOfHell 69 native
 {
     Health 500
-    SeeSound "knight/sight"
-    ActiveSound "knight/active"
-    PainSound "knight/pain"
-    DeathSound "knight/death"
-    HitObituary "$OB_KNIGHTHIT"
-    Obituary "$OB_KNIGHT"
+    SeeSound KnightSight
+    ActiveSound KnightActive
+    PainSound KnightPain
+    DeathSound KnightDeath
+    HitObituary "%o was gutted by a Hell Knight."
+    Obituary "%o was splayed by a Hell Knight."
     States
     {
     Spawn:
@@ -88,7 +103,7 @@ thing HellKnight : BaronOfHell
         BOS2 I  8
         BOS2 J  8 A_Scream
         BOS2 K  8
-        BOS2 L  8 A_NoBlocking
+        BOS2 L  8 A_Fall
         BOS2 MN 8
         BOS2 O -1
         Stop
@@ -105,20 +120,17 @@ thing HellKnight : BaronOfHell
 //
 //===========================================================================
 
-thing BaronBall
+thing BaronBall native
 {
     Radius 6
     Height 16
     Speed 15
-    FastSpeed 20
+    AltSpeed 20
     Damage 8
     PROJECTILE
-    +RANDOMIZE
-    RenderStyle "Add"
-    Alpha 1
-    SeeSound "baron/attack"
-    DeathSound "baron/shotx"
-    Decal "BaronScorch"
+    //RenderStyle "Add"
+    SeeSound BaronAttack
+    DeathSound BaronShotx
     States
     {
     Spawn:

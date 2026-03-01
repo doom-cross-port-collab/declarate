@@ -1,10 +1,20 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Mancubus
 //
 //===========================================================================
 
-thing Fatso
+sound FatsoSight     { prefix lump "MANSIT" }
+sound FatsoActive    { prefix lump "POSACT" }
+sound FatsoPain      { prefix lump "MNPAIN" }
+sound FatsoRaiseguns { prefix lump "MANATK" }
+sound FatsoDeath     { prefix lump "MANDTH" }
+sound FatsoAttack    { prefix lump "FIRSHT" }
+sound FatsoShotx     { prefix lump "FIRXPL" }
+
+thing Fatso 67 native
 {
     Health 600
     Radius 48
@@ -13,12 +23,12 @@ thing Fatso
     Speed 8
     PainChance 80
     MONSTER
-    +BOSSDEATH
-    SeeSound "fatso/sight"
-    PainSound "fatso/pain"
-    DeathSound "fatso/death"
-    ActiveSound "fatso/active"
-    Obituary "$OB_FATSO"
+    +MAP07BOSS1
+    SeeSound FatsoSight
+    PainSound FatsoPain
+    DeathSound FatsoDeath
+    ActiveSound FatsoActive
+    Obituary "%o was squashed by a mancubus."
     States
     {
     Spawn:
@@ -43,7 +53,7 @@ thing Fatso
     Death:
         FATT K 6
         FATT L 6 A_Scream
-        FATT M 6 A_NoBlocking
+        FATT M 6 A_Fall
         FATT NOPQRS 6
         FATT T -1 A_BossDeath
          Stop
@@ -60,18 +70,16 @@ thing Fatso
 //
 //===========================================================================
 
-thing FatShot
+thing FatShot native
 {
     Radius 6
     Height 8
     Speed 20
     Damage 8
-    Projectile
-    +RANDOMIZE
-    RenderStyle Add
-    Alpha 1
-    SeeSound "fatso/attack"
-    DeathSound "fatso/shotx"
+    PROJECTILE
+    //RenderStyle "Add"
+    SeeSound FatsoAttack
+    DeathSound FatsoShotx
     States
     {
     Spawn:

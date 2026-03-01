@@ -1,10 +1,19 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Cacodemon
 //
 //===========================================================================
 
-thing Cacodemon
+sound CacoSight  { prefix lump "CACSIT" }
+sound CacoActive { prefix lump "DMACT" }
+sound CacoPain   { prefix lump "DMPAIN" }
+sound CacoDeath  { prefix lump "CACDTH" }
+sound CacoAttack { prefix lump "FIRSHT" }
+sound CacoShotx  { prefix lump "FIRXPL" }
+
+thing Cacodemon 3005 native
 {
     Health 400
     Radius 31
@@ -15,12 +24,12 @@ thing Cacodemon
     MONSTER
     +FLOAT
     +NOGRAVITY
-    SeeSound "caco/sight"
-    PainSound "caco/pain"
-    DeathSound "caco/death"
-    ActiveSound "caco/active"
-    Obituary "$OB_CACO"
-    HitObituary "$OB_CACOHIT"
+    SeeSound CacoSight
+    PainSound CacoPain
+    DeathSound CacoDeath
+    ActiveSound CacoActive
+    Obituary "%o was smitten by a cacodemon."
+    HitObituary "%o got too close to a cacodemon."
     States
     {
     Spawn:
@@ -44,12 +53,11 @@ thing Cacodemon
         HEAD H 8 A_Scream
         HEAD I 8
         HEAD J 8
-        HEAD K 8 A_NoBlocking
-        HEAD L -1 A_SetFloorClip
+        HEAD K 8 A_Fall
+        HEAD L -1
         Stop
     Raise:
-        HEAD L 8 A_UnSetFloorClip
-        HEAD KJIHG 8
+        HEAD LKJIHG 8
         Goto See
     }
 }
@@ -60,19 +68,17 @@ thing Cacodemon
 //
 //===========================================================================
 
-thing CacodemonBall
+thing CacodemonBall native
 {
     Radius 6
     Height 8
     Speed 10
-    FastSpeed 20
+    AltSpeed 20
     Damage 5
     PROJECTILE
-    +RANDOMIZE
-    RenderStyle "Add"
-    Alpha 1
-    SeeSound "caco/attack"
-    DeathSound "caco/shotx"
+    //RenderStyle "Add"
+    SeeSound CacoAttack
+    DeathSound CacoShotx
     States
     {
     Spawn:

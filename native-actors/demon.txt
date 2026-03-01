@@ -1,10 +1,18 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Pink Demon
 //
 //===========================================================================
 
-thing Demon
+sound DemonSight  { prefix lump "SGTSIT" }
+sound DemonActive { prefix lump "DMACT" }
+sound DemonPain   { prefix lump "DMPAIN" }
+sound DemonMelee  { prefix lump "SGTATK" }
+sound DemonDeath  { prefix lump "SGTDTH" }
+
+thing Demon 3002 native
 {
     Health 150
     PainChance 180
@@ -13,12 +21,12 @@ thing Demon
     Height 56
     Mass 400
     MONSTER
-    SeeSound "demon/sight"
-    AttackSound "demon/melee"
-    PainSound "demon/pain"
-    DeathSound "demon/death"
-    ActiveSound "demon/active"
-    Obituary "$OB_DEMONHIT"
+    SeeSound DemonSight
+    AttackSound DemonMelee
+    PainSound DemonPain
+    DeathSound DemonDeath
+    ActiveSound DemonActive
+    Obituary "%o was bit by a demon."
     States
     {
     Spawn:
@@ -39,7 +47,7 @@ thing Demon
         SARG I 8
         SARG J 8 A_Scream
         SARG K 4
-        SARG L 4 A_NoBlocking
+        SARG L 4 A_Fall
         SARG M 4
         SARG N -1
         Stop
@@ -56,14 +64,20 @@ thing Demon
 //
 //===========================================================================
 
-thing Spectre : Demon
+sound SpectreSight  { prefix lump "SGTSIT" }
+sound SpectreActive { prefix lump "DMACT" }
+sound SpectrePain   { prefix lump "DMPAIN" }
+sound SpectreMelee  { prefix lump "SGTATK" }
+sound SpectreDeath  { prefix lump "SGTDTH" }
+
+thing Spectre : Demon 58 native
 {
     +SHADOW
     RenderStyle "Fuzzy"
-    SeeSound "spectre/sight"
-    AttackSound "spectre/melee"
-    PainSound "spectre/pain"
-    DeathSound "spectre/death"
-    ActiveSound "spectre/active"
-    HitObituary "$OB_SPECTREHIT"
+    SeeSound SpectreSight
+    AttackSound SpectreMelee
+    PainSound SpectrePain
+    DeathSound SpectreDeath
+    ActiveSound SpectreActive
+    HitObituary "%o was eaten by a spectre."
 }

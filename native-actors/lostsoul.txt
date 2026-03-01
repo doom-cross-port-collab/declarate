@@ -1,10 +1,17 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Lost Soul
 //
 //===========================================================================
 
-thing LostSoul
+sound SkullActive { prefix lump "DMACT" }
+sound SkullPain   { prefix lump "DMPAIN" }
+sound SkullMelee  { prefix lump "SKLATK" }
+sound SkullDeath  { prefix lump "FIRXPL" }
+
+thing LostSoul 3006 native
 {
     Health 100
     Radius 16
@@ -16,12 +23,12 @@ thing LostSoul
     MONSTER
     +FLOAT
     +NOGRAVITY
-    AttackSound "skull/melee"
-    PainSound "skull/pain"
-    DeathSound "skull/death"
-    ActiveSound "skull/active"
-    RenderStyle SoulTrans
-    Obituary "$OB_SKULL"
+    +RANGEHALF
+    AttackSound SkullMelee
+    PainSound SkullPain
+    DeathSound SkullDeath
+    ActiveSound SkullActive
+    Obituary "%o was spooked by a lost soul."
     States
     {
     Spawn:
@@ -43,14 +50,14 @@ thing LostSoul
         SKUL F 6 BRIGHT
         SKUL G 6 BRIGHT A_Scream
         SKUL H 6 BRIGHT
-        SKUL I 6 BRIGHT A_NoBlocking
+        SKUL I 6 BRIGHT A_Fall
         SKUL J 6
         SKUL K 6
         Stop
     }
 }
 
-thing BetaSkull : LostSoul
+thing BetaSkull : LostSoul native
 {
     States
     {

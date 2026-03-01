@@ -1,3 +1,4 @@
+metadata { type "declarate" version "1.0.0" }
 
 //===========================================================================
 //
@@ -5,16 +6,22 @@
 //
 //===========================================================================
 
-thing BossBrain
+sound BrainSight    { prefix lump "BOSSIT" }
+sound BrainPain     { prefix lump "BOSPN" }
+sound BrainDeath    { prefix lump "BOSDTH" }
+sound BrainSpit     { prefix lump "BOSPIT" }
+sound BrainCube     { prefix lump "BOSCUB" }
+sound BrainCubeboom { prefix lump "FIRXPL" }
+
+thing BossBrain 88 native
 {
     Health 250
     Mass 10000000
     PainChance 255
     +SOLID
     +SHOOTABLE
-    +OLDRADIUSDMG
-    PainSound "brain/pain"
-    DeathSound "brain/death"
+    PainSound BrainPain
+    DeathSound BrainDeath
     States
     {
     BrainExplode:
@@ -41,7 +48,7 @@ thing BossBrain
 //
 //===========================================================================
 
-thing BossEye
+thing BossEye 89 native
 {
     Height 32
     +NOBLOCKMAP
@@ -64,7 +71,7 @@ thing BossEye
 //
 //===========================================================================
 
-thing BossTarget : SpecialSpot
+thing BossTarget 87 native
 {
     Height 32
     +NOBLOCKMAP
@@ -77,18 +84,16 @@ thing BossTarget : SpecialSpot
 //
 //===========================================================================
 
-thing SpawnShot
+thing SpawnShot native
 {
     Radius 6
     Height 32
     Speed 10
     Damage 3
-    Projectile
+    PROJECTILE
     +NOCLIP
-    -ACTIVATEPCROSS
-    +RANDOMIZE
-    SeeSound "brain/spit"
-    DeathSound "brain/cubeboom"
+    SeeSound BrainSpit
+    DeathSound BrainCubeboom
     States
     {
     Spawn:
@@ -104,12 +109,12 @@ thing SpawnShot
 //
 //===========================================================================
 
-thing SpawnFire
+thing SpawnFire native
 {
     Height 78
     +NOBLOCKMAP
     +NOGRAVITY
-    RenderStyle "Add"
+    //RenderStyle "Add"
     States
     {
     Spawn:

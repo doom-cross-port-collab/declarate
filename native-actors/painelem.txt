@@ -1,9 +1,17 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Pain Elemental
 //
 //===========================================================================
-thing PainElemental
+
+sound PainSight  { prefix lump "PESIT" }
+sound PainActive { prefix lump "DMACT" }
+sound PainPain   { prefix lump "PEPAIN" }
+sound PainDeath  { prefix lump "PEDTH" }
+
+thing PainElemental 71 native
 {
     Health 400
     Radius 31
@@ -14,10 +22,10 @@ thing PainElemental
     MONSTER
     +FLOAT
     +NOGRAVITY
-    SeeSound "pain/sight"
-    PainSound "pain/pain"
-    DeathSound "pain/death"
-    ActiveSound "pain/active"
+    SeeSound PainSight
+    PainSound PainPain
+    DeathSound PainDeath
+    ActiveSound PainActive
     States
     {
     Spawn:

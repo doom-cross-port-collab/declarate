@@ -1,6 +1,10 @@
+metadata { type "declarate" version "1.0.0" }
+
 // The barrel of green goop ------------------------------------------------
 
-thing ExplosiveBarrel
+sound WorldBarrelx { prefix lump "BAREXP" }
+
+thing ExplosiveBarrel 2035 native
 {
     Health 20
     Radius 10
@@ -8,8 +12,8 @@ thing ExplosiveBarrel
     +SOLID
     +SHOOTABLE
     +NOBLOOD
-    DeathSound "world/barrelx"
-    Obituary "$OB_BARREL"
+    DeathSound WorldBarrelx
+    Obituary "%o went boom."
     States
     {
     Spawn:
@@ -19,66 +23,33 @@ thing ExplosiveBarrel
         BEXP A 5 BRIGHT
         BEXP B 5 BRIGHT A_Scream
         BEXP C 5 BRIGHT
-        BEXP D 5 BRIGHT A_Explode
+        BEXP D 10 BRIGHT A_Explode
         BEXP E 10 BRIGHT
-        TNT1 A 1050 BRIGHT A_BarrelDestroy
-        TNT1 A 5 A_Respawn
-        Wait
+        Stop
     }
 }
 
 // Bullet puff -------------------------------------------------------------
 
-thing BulletPuff
+thing BulletPuff native
 {
     +NOBLOCKMAP
     +NOGRAVITY
-    +RANDOMIZE
-    RenderStyle Translucent
-    Alpha 0.5
-    VSpeed 1
+    //RenderStyle "Translucent"
     Mass 5
     States
     {
     Spawn:
         PUFF A 4 Bright
-        PUFF B 4
-    Melee:
-        PUFF CD 4
+        PUFF BCD 4
         Stop
-    }
-}
-
-// Container for an unused state -------------------------------------------
-
-/* Doom defined the states S_STALAG, S_DEADTORSO, and S_DEADBOTTOM but never
- * actually used them. For compatibility with DeHackEd patches, they still
- * need to be kept around. This thing serves that purpose.
- */
-
-thing DoomUnusedStates
-{
-    States
-    {
-    Label1:
-        SMT2 A -1
-        stop
-    Label2:
-        PLAY N -1
-        stop
-        PLAY S -1
-        stop
-    TNT: // MBF compatibility
-        TNT1 A -1
-        Loop
     }
 }
 
 // MBF Beta emulation items
 
-thing EvilSceptre : ScoreItem
+thing EvilSceptre 2016 native
 {
-    Inventory.PickupMessage "$BETA_BONUS3"
     States
     {
     Spawn:
@@ -87,13 +58,42 @@ thing EvilSceptre : ScoreItem
     }
 }
 
-thing UnholyBible : ScoreItem
+thing UnholyBible 2017 native
 {
-    Inventory.PickupMessage "$BETA_BONUS4"
     States
     {
     Spawn:
         BON4 A 6
         Loop
+    }
+}
+
+// Gibbed marine -----------------------------------------------------------
+
+thing GibbedMarine 10 native
+{
+    States
+    {
+    Spawn:
+        PLAY W -1
+        Stop
+    }
+}
+
+// Gibbed marine (extra copy) ----------------------------------------------
+
+thing GibbedMarineExtra : GibbedMarine 12 native
+{
+}
+
+// Dead marine -------------------------------------------------------------
+
+thing DeadMarine 15 native
+{
+    States
+    {
+    Spawn:
+        PLAY N -1
+        Stop
     }
 }

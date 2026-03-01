@@ -1,10 +1,21 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Revenant
 //
 //===========================================================================
 
-thing Revenant
+sound SkeletonSight  { prefix lump "SKESIT" }
+sound SkeletonActive { prefix lump "SKEACT" }
+sound SkeletonPain   { prefix lump "POPAIN" }
+sound SkeletonMelee  { prefix lump "SKEPCH" }
+sound SkeletonSwing  { prefix lump "SKESWG" }
+sound SkeletonDeath  { prefix lump "SKEDTH" }
+sound SkeletonAttack { prefix lump "SKEATK" }
+sound SkeletonTracex { prefix lump "BAREXP" }
+
+thing Revenant 66 native
 {
     Health 300
     Radius 20
@@ -12,17 +23,16 @@ thing Revenant
     Mass 500
     Speed 10
     PainChance 100
-    Monster
-    MeleeThreshold 196
-    +MISSILEMORE
-    +FLOORCLIP
-    SeeSound "skeleton/sight"
-    PainSound "skeleton/pain"
-    DeathSound "skeleton/death"
-    ActiveSound "skeleton/active"
-    MeleeSound "skeleton/melee"
-    HitObituary "$OB_UNDEADHIT"
-    Obituary "$OB_UNDEAD"
+    MONSTER
+    +LONGMELEE
+    +RANGEHALF
+    SeeSound SkeletonSight
+    PainSound SkeletonPain
+    DeathSound SkeletonDeath
+    ActiveSound SkeletonActive
+    //MeleeSound SkeletonMelee
+    HitObituary "%o was punched by a revenant."
+    Obituary "%o couldn't evade a revenant's fireball."
     States
     {
     Spawn:
@@ -50,7 +60,7 @@ thing Revenant
     Death:
         SKEL LM 7
         SKEL N 7 A_Scream
-        SKEL O 7 A_NoBlocking
+        SKEL O 7 A_Fall
         SKEL P 7
         SKEL Q -1
         Stop
@@ -67,18 +77,16 @@ thing Revenant
 //
 //===========================================================================
 
-thing RevenantTracer
+thing RevenantTracer native
 {
     Radius 11
     Height 8
     Speed 10
     Damage 10
-    Projectile
-    +SEEKERMISSILE
-    +RANDOMIZE
-    SeeSound "skeleton/attack"
-    DeathSound "skeleton/tracex"
-    RenderStyle Add
+    PROJECTILE
+    SeeSound SkeletonAttack
+    DeathSound SkeletonTracex
+    //RenderStyle "Add"
     States
     {
     Spawn:
@@ -98,13 +106,11 @@ thing RevenantTracer
 //
 //===========================================================================
 
-thing RevenantTracerSmoke
+thing RevenantTracerSmoke native
 {
     +NOBLOCKMAP
     +NOGRAVITY
-    +NOTELEPORT
-    RenderStyle "Translucent"
-    Alpha 0.5
+    //RenderStyle "Translucent"
     States
     {
     Spawn:

@@ -1,9 +1,20 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Arachnotron
 //
 //===========================================================================
-thing Arachnotron
+
+sound BabySight   { prefix lump "BSPSIT" }
+sound BabyActive  { prefix lump "BSPACT" }
+sound BabyPain    { prefix lump "DMPAIN" }
+sound BabyDeath   { prefix lump "BSPDTH" }
+sound BabyWalk    { prefix lump "BSPWLK" }
+sound BabyAttack  { prefix lump "PLASMA" }
+sound BabyShotx   { prefix lump "FIRXPL" }
+
+thing Arachnotron 68 native
 {
     Health 500
     Radius 64
@@ -11,13 +22,13 @@ thing Arachnotron
     Mass 600
     Speed 12
     PainChance 128
-    Monster
-    +BOSSDEATH
-    SeeSound "baby/sight"
-    PainSound "baby/pain"
-    DeathSound "baby/death"
-    ActiveSound "baby/active"
-    Obituary "$OB_BABY"
+    MONSTER
+    +MAP07BOSS2
+    SeeSound BabySight
+    PainSound BabyPain
+    DeathSound BabyDeath
+    ActiveSound BabyActive
+    Obituary "%o let an arachnotron get %h."
     States
     {
     Spawn:
@@ -42,7 +53,7 @@ thing Arachnotron
         Goto See+1
     Death:
         BSPI J 20 A_Scream
-        BSPI K 7 A_NoBlocking
+        BSPI K 7 A_Fall
         BSPI LMNO 7
         BSPI P -1 A_BossDeath
         Stop
@@ -58,18 +69,17 @@ thing Arachnotron
 // Arachnotron plasma
 //
 //===========================================================================
-thing ArachnotronPlasma
+
+thing ArachnotronPlasma native
 {
     Radius 13
     Height 8
     Speed 25
     Damage 5
-    Projectile
-    +RANDOMIZE
-    RenderStyle Add
-    Alpha 0.75
-    SeeSound "baby/attack"
-    DeathSound "baby/shotx"
+    PROJECTILE
+    //RenderStyle "Add"
+    SeeSound BabyAttack
+    DeathSound BabyShotx
     States
     {
     Spawn:

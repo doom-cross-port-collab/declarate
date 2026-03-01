@@ -1,9 +1,15 @@
+metadata { type "declarate" version "1.0.0" }
+
 //===========================================================================
 //
 // Commander Keen
 //
 //===========================================================================
-ACTOR CommanderKeen
+
+sound KeenPain  { prefix lump "KEENPN" }
+sound KeenDeath { prefix lump "KEENDT" }
+
+thing CommanderKeen 73 native
 {
     Health 100
     Radius 16
@@ -15,9 +21,8 @@ ACTOR CommanderKeen
     +NOGRAVITY
     +SHOOTABLE
     +COUNTKILL
-    +ISMONSTER
-    PainSound "keen/pain"
-    DeathSound "keen/death"
+    PainSound KeenPain
+    DeathSound KeenDeath
     States
     {
     Spawn:
